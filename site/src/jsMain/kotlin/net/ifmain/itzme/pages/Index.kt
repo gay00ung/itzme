@@ -141,7 +141,7 @@ fun topNavBar(currentSection: Int, onSectionChange: (Int) -> Unit) {
     ) {
         // 로고
         SpanText(
-            "SHIN_",
+            "Hello! I'm Gayoung!",
             Modifier
                 .fontSize(1.5.cssRem)
                 .fontWeight(FontWeight.Bold)

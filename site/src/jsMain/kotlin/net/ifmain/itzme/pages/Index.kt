@@ -683,10 +683,11 @@ fun workSection() {
             Column(
                 Modifier.gap(30.px)
             ) {
-                projectRow("01", "MONOLOGUE", "Minimal diary application", "KOTLIN / COMPOSE")
-                projectRow("02", "WORGLE", "Real-time word game", "KOTLIN / FIREBASE")
-                projectRow("03", "POIT", "AI diet management", "KOTLIN / ML KIT")
-                projectRow("04", "QR MINE", "QR code generator", "KOTLIN / ZXING")
+                projectRow("01", "POIT", "AI 기반 음식 영양 정보 분석 앱", "KOTLIN / GPT API / Firebase Auth / Hilt")
+                projectRow("02", "환율톡톡", "매일 오늘의 환율을 알려주는 환율 알리미 앱", "KMP / Koin / Admob / Clean Architecture")
+                projectRow("03", "모노로그", "하루 한 줄 감정과 함께 기록하는 개인 일기장 앱", "Compose / Ktor / Firebase Auth")
+                projectRow("04", "WorgleWorgle", "매일 새로운 단어를 추측하는 한국형 단어 게임 앱", "Kotlin / Compose")
+                projectRow("05", "QR MINE", "QR 코드 생성 앱", "Kotlin / ZXING")
             }
         }
     }

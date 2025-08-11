@@ -7,23 +7,18 @@ kotlin-js-store
 # IntelliJ ignores
 *.iml
 /*.ipr
-
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/gradle.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-/.idea/artifacts
-/.idea/compiler.xml
-/.idea/jarRepositories.xml
-/.idea/*.iml
-/.idea/modules
-/.idea/libraries-with-intellij-classes.xml
+.idea/
 
 # Gradle ignores
 .gradle
 
 # Kotlin ignores
 .kotlin
+
+# Java heap dumps and logs
+*.hprof
+java_pid*.hprof
+hs_err_pid*.log
+
+# Kobweb
+.kobweb/

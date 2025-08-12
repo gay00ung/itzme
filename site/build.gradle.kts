@@ -15,6 +15,9 @@ kobweb {
         index {
             description.set("Powered by Kobweb")
         }
+        export {
+            includeSourceMap = false
+        }
     }
 }
 

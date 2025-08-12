@@ -41,12 +41,25 @@ jobs:
           # Move build output to root level for Vercel
           mv site/.kobweb/site/* .
           mv site/.kobweb/site/.* . 2>/dev/null || true
-          # Ensure index.html is at root
-          if [ -f pages/index.html ]; then
-            cp pages/index.html index.html
+          
+          # Move HTML files from pages folder to root
+          if [ -d pages ]; then
+            # Copy index.html to root
+            if [ -f pages/index.html ]; then
+              cp pages/index.html index.html
+            fi
+            # Copy other HTML files to root
+            if [ -f pages/about.html ]; then
+              cp pages/about.html about.html
+            fi
+            if [ -f pages/work.html ]; then
+              cp pages/work.html work.html
+            fi
+            if [ -f pages/contact.html ]; then
+              cp pages/contact.html contact.html
+            fi
           fi
-          # Create simple vercel.json
-          echo '{"version": 2}' > vercel.json
+          
           # List files for debugging
           echo "Root directory contents:"
           ls -la .

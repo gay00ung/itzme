@@ -414,5 +414,3 @@ A: git push만 하면 자동! GitHub Actions + Vercel
 - Compose 문법 그대로 쓸 수 있는 게 장점
 
 ---
-
-**이제 이 프로젝트가 어떻게 돌아가는지 알겠지? 🚀**

@@ -38,12 +38,18 @@ jobs:
         
       - name: Prepare deployment files
         run: |
-          # Copy main page as index.html
-          cp site/.kobweb/site/pages/index.html site/.kobweb/site/index.html
+          # Move build output to root level for Vercel
+          mv site/.kobweb/site/* .
+          mv site/.kobweb/site/.* . 2>/dev/null || true
+          # Ensure index.html is at root
+          if [ -f pages/index.html ]; then
+            cp pages/index.html index.html
+          fi
           # Create simple vercel.json
-          echo '{"version": 2}' > site/.kobweb/site/vercel.json
+          echo '{"version": 2}' > vercel.json
           # List files for debugging
-          ls -la site/.kobweb/site/
+          echo "Root directory contents:"
+          ls -la .
           
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
@@ -51,7 +57,7 @@ jobs:
       - name: Deploy to Vercel (Production)
         if: github.ref == 'refs/heads/main'
         run: |
-          vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes --cwd site/.kobweb/site
+          vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -59,7 +65,7 @@ jobs:
       - name: Deploy to Vercel (Preview)
         if: github.event_name == 'pull_request'
         run: |
-          vercel --token ${{ secrets.VERCEL_TOKEN }} --yes --cwd site/.kobweb/site
+          vercel --token ${{ secrets.VERCEL_TOKEN }} --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

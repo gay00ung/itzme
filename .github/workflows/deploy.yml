@@ -40,6 +40,8 @@ jobs:
         run: |
           # Copy main page as index.html
           cp site/.kobweb/site/pages/index.html site/.kobweb/site/index.html
+          # Create simple vercel.json
+          echo '{"version": 2}' > site/.kobweb/site/vercel.json
           # List files for debugging
           ls -la site/.kobweb/site/
           
@@ -49,8 +51,7 @@ jobs:
       - name: Deploy to Vercel (Production)
         if: github.ref == 'refs/heads/main'
         run: |
-          cd site/.kobweb/site
-          vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
+          vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes --cwd site/.kobweb/site
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -58,8 +59,7 @@ jobs:
       - name: Deploy to Vercel (Preview)
         if: github.event_name == 'pull_request'
         run: |
-          cd site/.kobweb/site
-          vercel --token ${{ secrets.VERCEL_TOKEN }} --yes
+          vercel --token ${{ secrets.VERCEL_TOKEN }} --yes --cwd site/.kobweb/site
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

@@ -19,6 +19,7 @@ import org.jetbrains.compose.web.dom.Code
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Pre
+import kotlinx.browser.window
 
 // 텍스트 글리치 애니메이션
 val GlitchAnimation = Keyframes {
@@ -95,6 +96,27 @@ val MoveHorizontal = Keyframes {
 @Composable
 fun homePage() {
     var currentSection by remember { mutableStateOf(0) }
+    
+    // URL 해시 변경 감지
+    LaunchedEffect(Unit) {
+        val hash = window.location.hash
+        currentSection = when(hash) {
+            "#about" -> 1
+            "#work" -> 2
+            "#contact" -> 3
+            else -> 0
+        }
+        
+        window.addEventListener("hashchange", {
+            val newHash = window.location.hash
+            currentSection = when(newHash) {
+                "#about" -> 1
+                "#work" -> 2
+                "#contact" -> 3
+                else -> 0
+            }
+        })
+    }
 
     Box(
         Modifier
@@ -107,6 +129,13 @@ fun homePage() {
         // 상단 네비게이션 바
         topNavBar(currentSection) { section ->
             currentSection = section
+            // URL 해시 업데이트
+            window.location.hash = when(section) {
+                1 -> "#about"
+                2 -> "#work"
+                3 -> "#contact"
+                else -> ""
+            }
         }
 
         // 메인 콘텐츠
@@ -184,11 +213,13 @@ fun navItem(title: String, isActive: Boolean, onClick: () -> Unit) {
                 property("font-weight", "500")
                 property("letter-spacing", "2px")
                 property("font-size", "0.9rem")
+                property("user-select", "none")
                 if (isActive) {
                     property("color", "#00ffff")
                 } else {
                     property("color", "#666666")
                 }
+                property("cursor", "pointer")
             }
     ) {
         SpanText(title)

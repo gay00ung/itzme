@@ -848,7 +848,7 @@ fun contactSection() {
             ) {
                 contactItem("EMAIL", "gayoung990911@gmail.com")
                 contactItem("GITHUB", "github.com/gay00ung")
-                contactItem("LINKEDIN", "linkedin.com/in/gayoung")
+                contactItem("LINKEDIN", "linkedin.com/in/가영-신-5118552b2/")
             }
         }
     }

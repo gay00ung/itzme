@@ -36,6 +36,13 @@ jobs:
       - name: Build project with Kobweb
         run: ./gradlew :site:kobwebExport --no-daemon
         
+      - name: Prepare deployment files
+        run: |
+          # Copy main page as index.html
+          cp site/.kobweb/site/pages/index.html site/.kobweb/site/index.html
+          # List files for debugging
+          ls -la site/.kobweb/site/
+          
       - name: Deploy to Vercel (Production)
         if: github.ref == 'refs/heads/main'
         uses: amondnet/vercel-action@v25

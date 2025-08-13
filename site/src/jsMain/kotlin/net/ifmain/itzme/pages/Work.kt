@@ -1,6 +1,6 @@
 package net.ifmain.itzme.pages
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -69,11 +69,41 @@ fun workSection() {
             Column(
                 Modifier.gap(30.px)
             ) {
-                projectRow("01", "POIT", "AI 기반 음식 영양 정보 분석 앱", "KOTLIN / GPT API / Firebase Auth / Hilt", "https://play.google.com/store/apps/details?id=net.ifmain.poit.aos&pcampaignid=web_share")
-                projectRow("02", "환율톡톡", "매일 오늘의 환율을 알려주는 환율 알리미 앱", "KMP / Koin / Admob / Clean Architecture", "https://play.google.com/store/apps/details?id=net.ifmain.hwanultoktok.kmp")
-                projectRow("03", "모노로그", "하루 한 줄 감정과 함께 기록하는 개인 일기장 앱", "Compose / Ktor / Firebase Auth", "https://play.google.com/store/apps/details?id=net.ifmain.monologue")
-                projectRow("04", "WorgleWorgle", "매일 새로운 단어를 추측하는 한국형 단어 게임 앱", "Kotlin / Compose", "https://play.google.com/store/apps/details?id=com.worgle.worgle")
-                projectRow("05", "QR MINE", "QR 코드 생성 앱", "Kotlin / ZXING", "https://play.google.com/store/apps/details?id=net.ifmain.qr_mine")
+                projectRow(
+                    "01",
+                    "POIT",
+                    "AI 기반 음식 영양 정보 분석 앱",
+                    "KOTLIN / GPT API / Firebase Auth / Hilt",
+                    "https://play.google.com/store/apps/details?id=net.ifmain.poit.aos&pcampaignid=web_share"
+                )
+                projectRow(
+                    "02",
+                    "환율톡톡",
+                    "매일 오늘의 환율을 알려주는 환율 알리미 앱",
+                    "KMP / Koin / Admob / Clean Architecture",
+                    "https://play.google.com/store/apps/details?id=net.ifmain.hwanultoktok.kmp"
+                )
+                projectRow(
+                    "03",
+                    "모노로그",
+                    "하루 한 줄 감정과 함께 기록하는 개인 일기장 앱",
+                    "Compose / Ktor / Firebase Auth",
+                    "https://play.google.com/store/apps/details?id=net.ifmain.monologue"
+                )
+                projectRow(
+                    "04",
+                    "WorgleWorgle",
+                    "매일 새로운 단어를 추측하는 한국형 단어 게임 앱",
+                    "Kotlin / Compose",
+                    "https://play.google.com/store/apps/details?id=com.worgle.worgle"
+                )
+                projectRow(
+                    "05",
+                    "QR MINE",
+                    "QR 코드 생성 앱",
+                    "Kotlin / ZXING",
+                    "https://play.google.com/store/apps/details?id=net.ifmain.qr_mine"
+                )
             }
         }
     }

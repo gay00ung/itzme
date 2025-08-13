@@ -35,6 +35,11 @@ fun PageLayout(
             Modifier
                 .fillMaxSize()
                 .padding(top = 80.px)
+                .styleModifier {
+                    property("@media (max-width: 768px)", """
+                        padding-top: 60px;
+                    """)
+                }
         ) {
             content()
         }
@@ -52,7 +57,13 @@ fun TopNavBar(currentSection: Int) {
             .background(Color("#000000"))
             .borderBottom(1.px, LineStyle.Solid, Color("#00ffff"))
             .padding(0.px, 60.px)
-            .zIndex(1000),
+            .zIndex(1000)
+            .styleModifier {
+                property("@media (max-width: 768px)", """
+                    padding: 0 20px;
+                    height: 60px;
+                """)
+            },
         verticalAlignment = Alignment.CenterVertically
     ) {
         // 로고
@@ -70,6 +81,14 @@ fun TopNavBar(currentSection: Int) {
                     .styleModifier {
                         property("color", "#00ffff")
                         property("letter-spacing", "4px")
+                        property("@media (max-width: 768px)", """
+                            font-size: 0.9rem;
+                            letter-spacing: 1px;
+                        """)
+                        property("@media (max-width: 640px)", """
+                            font-size: 0.8rem;
+                            letter-spacing: 0px;
+                        """)
                     }
             )
         }
@@ -79,8 +98,17 @@ fun TopNavBar(currentSection: Int) {
             Modifier
                 .styleModifier {
                     property("margin-left", "auto")
+                    property("gap", "60px")
+                    property("@media (max-width: 1024px)", """
+                        gap: 30px;
+                    """)
+                    property("@media (max-width: 768px)", """
+                        gap: 15px;
+                    """)
+                    property("@media (max-width: 640px)", """
+                        gap: 10px;
+                    """)
                 }
-                .gap(60.px)
         ) {
             NavItem("HOME", "/", currentSection == 0)
             NavItem("ABOUT", "/about", currentSection == 1)
@@ -110,6 +138,16 @@ fun NavItem(title: String, path: String, isActive: Boolean) {
                     property("letter-spacing", "2px")
                     property("font-size", "0.9rem")
                     property("user-select", "none")
+                    property("@media (max-width: 768px)", """
+                        padding: 5px 8px;
+                        font-size: 0.7rem;
+                        letter-spacing: 0.5px;
+                    """)
+                    property("@media (max-width: 640px)", """
+                        padding: 4px 6px;
+                        font-size: 0.65rem;
+                        letter-spacing: 0px;
+                    """)
                     if (isActive) {
                         property("color", "#00ffff")
                     } else {

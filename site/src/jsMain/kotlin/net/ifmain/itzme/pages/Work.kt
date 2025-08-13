@@ -1,6 +1,6 @@
 package net.ifmain.itzme.pages
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -12,6 +12,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.text.SpanText
+import kotlinx.browser.window
 import net.ifmain.itzme.components.PageLayout
 import org.jetbrains.compose.web.css.*
 
@@ -63,29 +64,62 @@ fun workSection() {
                         }
                 )
             }
-            
+
             // 프로젝트 목록 - 가로 레이아웃
             Column(
                 Modifier.gap(30.px)
             ) {
-                projectRow("01", "POIT", "AI 기반 음식 영양 정보 분석 앱", "KOTLIN / GPT API / Firebase Auth / Hilt")
-                projectRow("02", "환율톡톡", "매일 오늘의 환율을 알려주는 환율 알리미 앱", "KMP / Koin / Admob / Clean Architecture")
-                projectRow("03", "모노로그", "하루 한 줄 감정과 함께 기록하는 개인 일기장 앱", "Compose / Ktor / Firebase Auth")
-                projectRow("04", "WorgleWorgle", "매일 새로운 단어를 추측하는 한국형 단어 게임 앱", "Kotlin / Compose")
-                projectRow("05", "QR MINE", "QR 코드 생성 앱", "Kotlin / ZXING")
+                projectRow(
+                    "01",
+                    "POIT",
+                    "AI 기반 음식 영양 정보 분석 앱",
+                    "KOTLIN / GPT API / Firebase Auth / Hilt",
+                    "https://play.google.com/store/apps/details?id=net.ifmain.poit.aos&pcampaignid=web_share"
+                )
+                projectRow(
+                    "02",
+                    "환율톡톡",
+                    "매일 오늘의 환율을 알려주는 환율 알리미 앱",
+                    "KMP / Koin / Admob / Clean Architecture",
+                    "https://play.google.com/store/apps/details?id=net.ifmain.hwanultoktok.kmp"
+                )
+                projectRow(
+                    "03",
+                    "모노로그",
+                    "하루 한 줄 감정과 함께 기록하는 개인 일기장 앱",
+                    "Compose / Ktor / Firebase Auth",
+                    "https://play.google.com/store/apps/details?id=net.ifmain.monologue"
+                )
+                projectRow(
+                    "04",
+                    "WorgleWorgle",
+                    "매일 새로운 단어를 추측하는 한국형 단어 게임 앱",
+                    "Kotlin / Compose",
+                    "https://play.google.com/store/apps/details?id=com.worgle.worgle"
+                )
+                projectRow(
+                    "05",
+                    "QR MINE",
+                    "QR 코드 생성 앱",
+                    "Kotlin / ZXING",
+                    "https://play.google.com/store/apps/details?id=net.ifmain.qr_mine"
+                )
             }
         }
     }
 }
 
 @Composable
-fun projectRow(number: String, title: String, description: String, tech: String) {
+fun projectRow(number: String, title: String, description: String, tech: String, url: String) {
     Box(
         Modifier
             .fillMaxWidth()
             .styleModifier {
                 property("position", "relative")
                 property("overflow", "hidden")
+            }
+            .onClick {
+                window.open(url, "_blank")
             }
     ) {
         // 호버 효과 배경
@@ -100,7 +134,7 @@ fun projectRow(number: String, title: String, description: String, tech: String)
                 }
                 .classNames("project-hover-bg")
         )
-        
+
         Row(
             Modifier
                 .fillMaxWidth()
@@ -110,72 +144,74 @@ fun projectRow(number: String, title: String, description: String, tech: String)
                 .styleModifier {
                     property("transition", "all 0.3s ease")
                     property("position", "relative")
-                    property("background", "linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.01) 50%, transparent 100%)")
+                    property(
+                        "background",
+                        "linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.01) 50%, transparent 100%)"
+                    )
                 }
-                .classNames("project-row")
-,
+                .classNames("project-row"),
             verticalAlignment = Alignment.CenterVertically
         ) {
-        // 프로젝트 번호
-        SpanText(
-            number,
-            Modifier
-                .fontSize(1.2.cssRem)
-                .color(Color("#00ffff"))
-                .margin(right = 50.px)
-                .styleModifier {
-                    property("font-weight", "300")
-                }
-        )
-        
-        // 프로젝트 제목
-        Column(
-            Modifier.flex(1)
-        ) {
+            // 프로젝트 번호
             SpanText(
-                title,
+                number,
                 Modifier
-                    .fontSize(2.cssRem)
-                    .color(Color("#ffffff"))
-                    .fontWeight(FontWeight.Bold)
+                    .fontSize(1.2.cssRem)
+                    .color(Color("#00ffff"))
+                    .margin(right = 50.px)
                     .styleModifier {
-                        property("letter-spacing", "1px")
+                        property("font-weight", "300")
                     }
             )
+
+            // 프로젝트 제목
+            Column(
+                Modifier.flex(1)
+            ) {
+                SpanText(
+                    title,
+                    Modifier
+                        .fontSize(2.cssRem)
+                        .color(Color("#ffffff"))
+                        .fontWeight(FontWeight.Bold)
+                        .styleModifier {
+                            property("letter-spacing", "1px")
+                        }
+                )
+                SpanText(
+                    description,
+                    Modifier
+                        .fontSize(1.cssRem)
+                        .color(Color("#666666"))
+                        .margin(top = 5.px)
+                )
+            }
+
+            // 기술 스택
             SpanText(
-                description,
+                tech,
                 Modifier
-                    .fontSize(1.cssRem)
-                    .color(Color("#666666"))
-                    .margin(top = 5.px)
+                    .fontSize(0.9.cssRem)
+                    .color(Color("#00ffff"))
+                    .styleModifier {
+                        property("letter-spacing", "2px")
+                        property("font-weight", "300")
+                    }
             )
+
+            // 애니메이션 화살표
+            Box(
+                Modifier
+                    .margin(left = 50.px)
+                    .styleModifier {
+                        property("color", "#00ffff")
+                        property("font-size", "1.5rem")
+                        property("transition", "transform 0.3s ease")
+                    }
+                    .classNames("project-arrow")
+            ) {
+                SpanText("→")
+            }
         }
-        
-        // 기술 스택
-        SpanText(
-            tech,
-            Modifier
-                .fontSize(0.9.cssRem)
-                .color(Color("#00ffff"))
-                .styleModifier {
-                    property("letter-spacing", "2px")
-                    property("font-weight", "300")
-                }
-        )
-        
-        // 애니메이션 화살표
-        Box(
-            Modifier
-                .margin(left = 50.px)
-                .styleModifier {
-                    property("color", "#00ffff")
-                    property("font-size", "1.5rem")
-                    property("transition", "transform 0.3s ease")
-                }
-                .classNames("project-arrow")
-        ) {
-            SpanText("→")
-        }
-    }
     }
 }

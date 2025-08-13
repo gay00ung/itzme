@@ -12,6 +12,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.text.SpanText
+import kotlinx.browser.window
 import net.ifmain.itzme.components.PageLayout
 import org.jetbrains.compose.web.css.*
 
@@ -74,21 +75,24 @@ fun contactSection() {
             Row(
                 Modifier.gap(60.px)
             ) {
-                contactItem("EMAIL", "gayoung990911@gmail.com")
-                contactItem("GITHUB", "github.com/gay00ung")
-                contactItem("LINKEDIN", "linkedin.com/in/가영-신-5118552b2/")
+                contactItem("EMAIL", "gayoung990911@gmail.com", " mailto:gayoung990911@gmail.com")
+                contactItem("GITHUB", "github.com/gay00ung", "https://github.com/gay00ung")
+                contactItem("LINKEDIN", "linkedin.com/in/가영-신-5118552b2/", "https://linkedin.com/in/가영-신-5118552b2/")
             }
         }
     }
 }
 
 @Composable
-fun contactItem(label: String, value: String) {
+fun contactItem(label: String, value: String, url: String) {
     Column(
         Modifier
             .cursor(Cursor.Pointer)
             .styleModifier {
                 property("transition", "all 0.3s ease")
+            }
+            .onClick {
+                window.open(url, "_blank")
             }
     ) {
         SpanText(

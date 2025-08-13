@@ -107,6 +107,7 @@ fun heroSection() {
                 property("align-items", "center")
                 property("position", "relative")
                 property("overflow", "hidden")
+                property("min-height", "100vh")
             }
     ) {
         // 그리드 배경 패턴
@@ -138,19 +139,39 @@ fun heroSection() {
         )
         
         // 메인 콘텐츠 - 분할 화면
-        Row(
+        Box(
             Modifier
                 .fillMaxSize()
-                .padding(0.px, 100.px)
+                .styleModifier {
+                    property("padding", "40px 20px")
+                    property("max-width", "1400px")
+                    property("margin", "0 auto")
+                    property("display", "flex")
+                    property("flex-direction", "row")
+                    property("align-items", "center")
+                    property("min-height", "calc(100vh - 80px)")
+                    property("@media (max-width: 768px)", """
+                        flex-direction: column;
+                        padding: 15px 10px;
+                        min-height: calc(100vh - 60px);
+                        justify-content: flex-start;
+                        padding-top: 40px;
+                    """)
+                }
         ) {
             // 왼쪽 - 텍스트
             Column(
                 Modifier
-                    .flex(1)
                     .styleModifier {
+                        property("flex", "1")
                         property("display", "flex")
                         property("flex-direction", "column")
                         property("justify-content", "center")
+                        property("@media (max-width: 768px)", """
+                            width: 100%;
+                            text-align: center;
+                            margin-bottom: 20px;
+                        """)
                     }
             ) {
                 Box(
@@ -161,9 +182,9 @@ fun heroSection() {
                     SpanText(
                         "ANDROID",
                         Modifier
-                            .fontSize(7.cssRem)
                             .fontWeight(FontWeight.Black)
                             .styleModifier {
+                                property("font-size", "clamp(2rem, 8vw, 7rem)")
                                 property("color", "#ffffff")
                                 property("line-height", "0.9")
                                 property("letter-spacing", "-2px")
@@ -179,9 +200,9 @@ fun heroSection() {
                     SpanText(
                         "DEVELOPER",
                         Modifier
-                            .fontSize(7.cssRem)
                             .fontWeight(FontWeight.Black)
                             .styleModifier {
+                                property("font-size", "clamp(2rem, 8vw, 7rem)")
                                 property("background", "linear-gradient(90deg, #00ffff 0%, #00ccff 50%, #00ffff 100%)")
                                 property("-webkit-background-clip", "text")
                                 property("-webkit-text-fill-color", "transparent")
@@ -238,8 +259,14 @@ fun heroSection() {
                         Modifier
                             .fontSize(1.2.cssRem)
                             .color(Color("#999999"))
-                            .maxWidth(500.px)
                             .lineHeight(1.6)
+                            .styleModifier {
+                                property("max-width", "500px")
+                                property("@media (max-width: 768px)", """
+                                    font-size: 1rem;
+                                    max-width: 100%;
+                                """)
+                            }
                     )
                 }
             }
@@ -247,11 +274,16 @@ fun heroSection() {
             // 오른쪽 - 코드 시각화
             Box(
                 Modifier
-                    .flex(1)
                     .styleModifier {
+                        property("flex", "1")
                         property("display", "flex")
                         property("align-items", "center")
                         property("justify-content", "center")
+                        property("@media (max-width: 768px)", """
+                            width: 100%;
+                            margin-top: 10px;
+                            transform: scale(0.8);
+                        """)
                     }
             ) {
                 codeBlock()
@@ -264,9 +296,14 @@ fun heroSection() {
 fun codeBlock() {
     Box(
         Modifier
-            .width(600.px)
             .styleModifier {
                 property("position", "relative")
+                property("width", "100%")
+                property("max-width", "600px")
+                property("@media (max-width: 768px)", """
+                    max-width: 100%;
+                    margin: 0 auto;
+                """)
             }
     ) {
         // 터미널 창
@@ -327,6 +364,10 @@ fun codeBlock() {
                         property("box-shadow", "0 20px 60px rgba(0, 0, 0, 0.8), 0 0 100px rgba(0, 255, 255, 0.1)")
                         property("border", "1px solid #1a1a1a")
                         property("border-top", "none")
+                        property("@media (max-width: 768px)", """
+                            padding: 20px;
+                            font-size: 0.8rem;
+                        """)
                     }
             ) {
                 Pre {

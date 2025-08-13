@@ -1,6 +1,6 @@
 package net.ifmain.itzme.pages
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -11,10 +11,13 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.navigation.OpenLinkStrategy
+import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
-import kotlinx.browser.window
 import net.ifmain.itzme.components.PageLayout
-import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.css.Color
+import org.jetbrains.compose.web.css.cssRem
+import org.jetbrains.compose.web.css.px
 
 @Page("/contact")
 @Composable
@@ -62,7 +65,7 @@ fun contactSection() {
                         property("text-shadow", "0 0 30px rgba(0, 255, 255, 0.5)")
                     }
             )
-            
+
             Box(
                 Modifier
                     .width(100.px)
@@ -70,12 +73,12 @@ fun contactSection() {
                     .background(Color("#00ffff"))
                     .margin(top = 60.px, bottom = 60.px)
             )
-            
+
             // 연락처 링크 - 가로
             Row(
                 Modifier.gap(60.px)
             ) {
-                contactItem("EMAIL", "gayoung990911@gmail.com", " mailto:gayoung990911@gmail.com")
+                contactItem("EMAIL", "gayoung990911@gmail.com", "mailto:gayoung990911@gmail.com")
                 contactItem("GITHUB", "github.com/gay00ung", "https://github.com/gay00ung")
                 contactItem("LINKEDIN", "linkedin.com/in/가영-신-5118552b2/", "https://linkedin.com/in/가영-신-5118552b2/")
             }
@@ -85,16 +88,21 @@ fun contactSection() {
 
 @Composable
 fun contactItem(label: String, value: String, url: String) {
-    Column(
-        Modifier
-            .cursor(Cursor.Pointer)
-            .styleModifier {
-                property("transition", "all 0.3s ease")
-            }
-            .onClick {
-                window.open(url, "_blank")
-            }
+    Link(
+        path = url,
+        modifier = Modifier.styleModifier {
+            property("text-decoration", "none")
+            property("color", "inherit")
+        },
+        openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
     ) {
+        Column(
+            Modifier
+                .cursor(Cursor.Pointer)
+                .styleModifier {
+                    property("transition", "all 0.3s ease")
+                }
+        ) {
         SpanText(
             label,
             Modifier
@@ -115,5 +123,6 @@ fun contactItem(label: String, value: String, url: String) {
                     property("text-underline-offset", "5px")
                 }
         )
+        }
     }
 }

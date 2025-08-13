@@ -11,8 +11,9 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.navigation.OpenLinkStrategy
+import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
-import kotlinx.browser.window
 import net.ifmain.itzme.components.PageLayout
 import org.jetbrains.compose.web.css.*
 
@@ -111,15 +112,22 @@ fun workSection() {
 
 @Composable
 fun projectRow(number: String, title: String, description: String, tech: String, url: String) {
-    Box(
+    Link(
+        path = url,
+        modifier = Modifier.styleModifier {
+            property("text-decoration", "none")
+            property("color", "inherit")
+            property("display", "block")
+            property("width", "100%")
+        },
+        openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
+    ) {
+        Box(
         Modifier
             .fillMaxWidth()
             .styleModifier {
                 property("position", "relative")
                 property("overflow", "hidden")
-            }
-            .onClick {
-                window.open(url, "_blank")
             }
     ) {
         // 호버 효과 배경
@@ -212,6 +220,7 @@ fun projectRow(number: String, title: String, description: String, tech: String,
             ) {
                 SpanText("→")
             }
+        }
         }
     }
 }

@@ -60,6 +60,14 @@ jobs:
             fi
           fi
           
+          # Ensure favicon is in root
+          if [ -f site/.kobweb/site/favicon.ico ]; then
+            cp site/.kobweb/site/favicon.ico favicon.ico 2>/dev/null || true
+          fi
+          if [ -f site/src/jsMain/resources/public/favicon.ico ]; then
+            cp site/src/jsMain/resources/public/favicon.ico favicon.ico 2>/dev/null || true
+          fi
+          
           # List files for debugging
           echo "Root directory contents:"
           ls -la .

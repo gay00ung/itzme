@@ -1,23 +1,12 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/favicon.ico", "destination": "/favicon.ico" },
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/about", "destination": "/index.html" },
-    { "source": "/work", "destination": "/index.html" },
-    { "source": "/contact", "destination": "/index.html" },
-    { "source": "/resources/(.*)", "destination": "/resources/$1" },
-    { "source": "/system/(.*)", "destination": "/system/$1" }
-  ],
-  "headers": [
-    {
-      "source": "/favicon.ico",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400"
-        }
-      ]
-    }
+  "routes": [
+    { "src": "/favicon.ico", "dest": "/favicon.ico" },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/about", "dest": "/about.html" },
+    { "src": "/work", "dest": "/work.html" },
+    { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/resources/(.*)", "dest": "/resources/$1" },
+    { "src": "/system/(.*)", "dest": "/system/$1" }
   ]
 }

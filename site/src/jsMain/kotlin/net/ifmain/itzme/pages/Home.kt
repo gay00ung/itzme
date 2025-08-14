@@ -1,6 +1,6 @@
 package net.ifmain.itzme.pages
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -21,7 +21,7 @@ import org.jetbrains.compose.web.dom.Pre
 
 // 텍스트 글리치 애니메이션
 val GlitchAnimation = Keyframes {
-    from { 
+    from {
         Modifier.styleModifier {
             property("text-shadow", "0 0 0 rgba(0, 255, 255, 0)")
         }
@@ -116,15 +116,17 @@ fun heroSection() {
                 .position(Position.Absolute)
                 .fillMaxSize()
                 .styleModifier {
-                    property("background-image", """
+                    property(
+                        "background-image", """
                         linear-gradient(rgba(0, 255, 255, 0.01) 1px, transparent 1px),
                         linear-gradient(90deg, rgba(0, 255, 255, 0.01) 1px, transparent 1px)
-                    """)
+                    """
+                    )
                     property("background-size", "50px 50px")
                     property("background-position", "0 0, 0 0")
                 }
         )
-        
+
         // 스캔 라인 효과
         Box(
             Modifier
@@ -137,26 +139,29 @@ fun heroSection() {
                 }
                 .animation(ScanLineAnimation.toAnimation(8.s))
         )
-        
+
         // 메인 콘텐츠 - 분할 화면
         Box(
             Modifier
                 .fillMaxSize()
                 .styleModifier {
-                    property("padding", "40px 20px")
-                    property("max-width", "1400px")
+                    property("padding", "40px 80px")
+                    property("max-width", "1800px")
+                    property("gap", "80px")
                     property("margin", "0 auto")
                     property("display", "flex")
                     property("flex-direction", "row")
                     property("align-items", "center")
                     property("min-height", "calc(100vh - 80px)")
-                    property("@media (max-width: 768px)", """
+                    property(
+                        "@media (max-width: 768px)", """
                         flex-direction: column;
                         padding: 15px 10px;
                         min-height: calc(100vh - 60px);
                         justify-content: flex-start;
                         padding-top: 40px;
-                    """)
+                    """
+                    )
                 }
         ) {
             // 왼쪽 - 텍스트
@@ -167,11 +172,13 @@ fun heroSection() {
                         property("display", "flex")
                         property("flex-direction", "column")
                         property("justify-content", "center")
-                        property("@media (max-width: 768px)", """
+                        property(
+                            "@media (max-width: 768px)", """
                             width: 100%;
                             text-align: center;
                             margin-bottom: 20px;
-                        """)
+                        """
+                        )
                     }
             ) {
                 Box(
@@ -182,9 +189,9 @@ fun heroSection() {
                     SpanText(
                         "ANDROID",
                         Modifier
+                            .fontSize(7.cssRem)
                             .fontWeight(FontWeight.Black)
                             .styleModifier {
-                                property("font-size", "clamp(2rem, 8vw, 7rem)")
                                 property("color", "#ffffff")
                                 property("line-height", "0.9")
                                 property("letter-spacing", "-2px")
@@ -200,9 +207,9 @@ fun heroSection() {
                     SpanText(
                         "DEVELOPER",
                         Modifier
+                            .fontSize(7.cssRem)
                             .fontWeight(FontWeight.Black)
                             .styleModifier {
-                                property("font-size", "clamp(2rem, 8vw, 7rem)")
                                 property("background", "linear-gradient(90deg, #00ffff 0%, #00ccff 50%, #00ffff 100%)")
                                 property("-webkit-background-clip", "text")
                                 property("-webkit-text-fill-color", "transparent")
@@ -227,7 +234,7 @@ fun heroSection() {
                             .animation(CursorBlink.toAnimation(1.s))
                     )
                 }
-                
+
                 Box(
                     Modifier
                         .width(100.px)
@@ -252,25 +259,27 @@ fun heroSection() {
                             .animation(MoveHorizontal.toAnimation(2.s))
                     )
                 }
-                
+
                 P {
                     SpanText(
                         "Building high-performance Android applications with Kotlin and Jetpack Compose",
                         Modifier
-                            .fontSize(1.2.cssRem)
+                            .fontSize(1.4.cssRem)
                             .color(Color("#999999"))
                             .lineHeight(1.6)
                             .styleModifier {
                                 property("max-width", "500px")
-                                property("@media (max-width: 768px)", """
+                                property(
+                                    "@media (max-width: 768px)", """
                                     font-size: 1rem;
                                     max-width: 100%;
-                                """)
+                                """
+                                )
                             }
                     )
                 }
             }
-            
+
             // 오른쪽 - 코드 시각화
             Box(
                 Modifier
@@ -279,11 +288,13 @@ fun heroSection() {
                         property("display", "flex")
                         property("align-items", "center")
                         property("justify-content", "center")
-                        property("@media (max-width: 768px)", """
+                        property(
+                            "@media (max-width: 768px)", """
                             width: 100%;
                             margin-top: 10px;
                             transform: scale(0.8);
-                        """)
+                        """
+                        )
                     }
             ) {
                 codeBlock()
@@ -299,11 +310,13 @@ fun codeBlock() {
             .styleModifier {
                 property("position", "relative")
                 property("width", "100%")
-                property("max-width", "600px")
-                property("@media (max-width: 768px)", """
+                property("max-width", "500px")
+                property(
+                    "@media (max-width: 768px)", """
                     max-width: 100%;
                     margin: 0 auto;
-                """)
+                """
+                )
             }
     ) {
         // 터미널 창
@@ -345,13 +358,13 @@ fun codeBlock() {
                     "MainActivity.kt",
                     Modifier
                         .styleModifier {
-                    property("margin-left", "auto")
-                }
-                        .fontSize(0.9.cssRem)
+                            property("margin-left", "auto")
+                        }
+                        .fontSize(1.2.cssRem)
                         .color(Color("#666666"))
                 )
             }
-            
+
             // 코드 내용
             Box(
                 Modifier
@@ -361,13 +374,10 @@ fun codeBlock() {
                     .borderRadius(bottomLeft = 8.px, bottomRight = 8.px)
                     .styleModifier {
                         property("font-family", "'JetBrains Mono', monospace")
+                        property("font-size", "1rem")
                         property("box-shadow", "0 20px 60px rgba(0, 0, 0, 0.8), 0 0 100px rgba(0, 255, 255, 0.1)")
                         property("border", "1px solid #1a1a1a")
                         property("border-top", "none")
-                        property("@media (max-width: 768px)", """
-                            padding: 20px;
-                            font-size: 0.8rem;
-                        """)
                     }
             ) {
                 Pre {
